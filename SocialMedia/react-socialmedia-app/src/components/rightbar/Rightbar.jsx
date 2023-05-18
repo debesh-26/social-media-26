@@ -115,7 +115,7 @@ const Rightbar = ({ user }) => {
               <b>Debesh</b> and <b>9 other friends</b> have a birthday today.
             </span>
           </div>
-          <img src="/assets/ad.png" alt="" className="rightbarAd" />
+          <img src="/assets/ad.jpg" alt="" className="rightbarAd" />
           <h4 className="rightbarTitle">Online Friends</h4>
           {Users.map((u) => (
             <Online key={u.id} user={u} />
