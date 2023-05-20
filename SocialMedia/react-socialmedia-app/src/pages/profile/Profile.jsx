@@ -4,8 +4,8 @@ import Leftbar from "../../components/leftbar/Leftbar";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Topbar from "../../components/topbar/Topbar";
 import "./profile.css";
-import axios from "axios";
 import { useParams } from "react-router";
+import { axiosInstance } from "../../config";
 
 const Profile = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -13,7 +13,7 @@ const Profile = () => {
   const username = useParams().username;
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${username}`);
+      const res = await axiosInstance.get(`/users?username=${username}`);
       setUser(res.data);
     };
     fetchUser();

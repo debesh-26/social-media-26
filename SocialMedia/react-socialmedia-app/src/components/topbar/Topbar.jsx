@@ -6,8 +6,8 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import { Link, useNavigate } from "react-router-dom";
 import BasicMenu from "../Basicmenu";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { axiosInstance } from "../../config";
 
 const Topbar = () => {
   const [searchTerm, setSearchTerm] = useState(null);
@@ -20,7 +20,7 @@ const Topbar = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await axios.get(`/users?username=${searchTerm}`);
+        const res = await axiosInstance.get(`/users?username=${searchTerm}`);
         setFriendsList(res.data);
       } catch (err) {
         console.log(err);

@@ -4,10 +4,10 @@ import { useState } from "react";
 import "./post.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CommentIcon from "@mui/icons-material/Comment";
-import axios from "axios";
 import { format } from "timeago.js";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
+import { axiosInstance } from "../../config";
 
 const Post = ({ post }) => {
   const [like, setLike] = useState(post.likes.length);
@@ -22,7 +22,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await axios.get(`/users?userId=${post.userId}`);
+      const res = await axiosInstance.get(`/users?userId=${post.userId}`);
       setUser(res.data);
     };
     fetchUsers();
@@ -30,7 +30,7 @@ const Post = ({ post }) => {
 
   const likeHandler = () => {
     try {
-      axios.put("/posts/" + post._id + "/like", { userId: currentUser._id });
+      axiosInstance.put("/posts/" + post._id + "/like", { userId: currentUser._id });
     } catch (err) {
       console.log(err);
     }
@@ -40,7 +40,7 @@ const Post = ({ post }) => {
 
   const handleDeletePost = async () => {
     try {
-      await axios.delete(`/posts/${post._id}`, {
+      await axiosInstance.delete(`/posts/${post._id}`, {
         data: { userId: currentUser._id },
       });
       window.location.reload();

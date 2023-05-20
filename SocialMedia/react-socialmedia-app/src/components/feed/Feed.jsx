@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import "./feed.css";
 import Share from "../share/Share";
 import Post from "../post/Post";
-import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import { axiosInstance } from "../../config";
 
 const Feed = ({ username }) => {
   const [Posts, setPosts] = useState([]);
@@ -11,8 +11,8 @@ const Feed = ({ username }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       const res = username
-        ? await axios.get("/posts/profile/" + username)
-        : await axios.get("posts/timeline/" + user._id);
+        ? await axiosInstance.get("/posts/profile/" + username)
+        : await axiosInstance.get("posts/timeline/" + user._id);
       setPosts(
         res.data.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
