@@ -4,10 +4,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 export default function BasicMenu() {
-  const navigate = useNavigate();
   const { user } = React.useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,8 +17,9 @@ export default function BasicMenu() {
     setAnchorEl(null);
   };
   const handleLogout = ()=>{
-    localStorage.removeItem('user');
-    navigate("/login");
+    window.localStorage.clear();
+    window.location.reload(true);
+    window.location.replace("/login")
   }
 
   return (
